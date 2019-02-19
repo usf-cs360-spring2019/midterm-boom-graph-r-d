@@ -1,0 +1,28 @@
+.hero.is-primary.is-bold {
+    background-image: linear-gradient(141deg,#9e0032 0,#ff2041 71%,#ff96a6 100%);
+}
+
+.navbar-item.has-dropdown .navbar-link {
+  color: white !important;
+}
+
+.navbar-item.has-dropdown:hover .navbar-link {
+  background-color: #52001a !important;
+}
+
+.navbar-link:hover, .navbar-item:hover {
+  background-color: #52001a !important;
+}
+
+.navbar-item.has-dropdown .navbar-link::after {
+  border-color: white !important;
+}
+
+.navbar-item.has-dropdown .navbar-dropdown .navbar-item {
+  color: black !important;
+}
+
+.navbar-item.has-dropdown .navbar-dropdown .navbar-item:hover {
+  color: white !important;
+  background-color: #C70022 !important;
+}

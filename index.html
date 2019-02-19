@@ -11,6 +11,7 @@
   <!-- bulma 0.7.2 and font awesome v5.7.1 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <!-- body -->
@@ -34,7 +35,6 @@
     <div class="hero-foot">
       <div class="container">
         <nav class="navbar" role="navigation" aria-label="main navigation">
-
           <div class="navbar-brand">
             <a class="navbar-item" href="#top">
               <span class="icon">
@@ -43,26 +43,24 @@
               <span>Home</span>
             </a>
           </div>
-
           <div id="main-navbar" class="navbar-menu">
-            <a class="navbar-item" href="#vis1">
-              <span class="icon">
-                <i class="fas fa-chart-area"></i>
-              </span>
-              <span>Visualization 1</span>
-            </a>
-          </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <span class="icon">
+                  <i class="fas fa-chart-area"></i>
+                </span>
+                <span>Visualizations</span>
+              </a>
 
-          <div id="main-navbar" class="navbar-menu">
-            <a class="navbar-item" href="#vis2">
-              <span class="icon">
-                <i class="fas fa-chart-area"></i>
-              </span>
-              <span>Visualization 2</span>
-            </a>
-          </div>
-
-          <div id="main-navbar" class="navbar-menu">
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="#vis1">
+                  Response time by distance and call type
+                </a>
+                <a class="navbar-item" href="#vis2">
+                  Change of priority based on location
+                </a>
+              </div>
+            </div>
             <a class="navbar-item" href="#proto">
               <span class="icon">
                 <i class="fas fa-chart-area"></i>
@@ -289,6 +287,31 @@
               </a>
               &bullet;
               <a href="https://www.linkedin.com/in/sameer-isaq-b19b13134">
+                <span class="fab fa-linkedin"></span>
+                <span>LinkedIn</span>
+              </a>
+            </p>
+        </div>
+      </div>
+      <div class="media">
+        <div class="media-left">
+          <p class="image is-128x128">
+            <img src="samuel_profile.png">
+          </p>
+        </div>
+
+        <div class="media-content">
+            <p>
+              <strong>Samuel Escapa</strong>
+              <br/>
+              Passionate learner and coder, explorer of the world!
+              <br/>
+              <a href="https://github.com/saescapa">
+                <span class="fab fa-github"></span>
+                <span>Github</span>
+              </a>
+              &bullet;
+              <a href="https://www.linkedin.com/in/samuel-escapa">
                 <span class="fab fa-linkedin"></span>
                 <span>LinkedIn</span>
               </a>
