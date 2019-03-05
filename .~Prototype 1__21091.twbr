@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <!-- build 20183.18.1219.1533                               -->
-<workbook original-version='18.1' source-build='2018.3.2 (20183.18.1219.1533)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+<workbook source-build='2018.3.2 (20183.18.1219.1533)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <document-format-change-manifest>
     <WindowsPersistSimpleIdentifiers />
   </document-format-change-manifest>
@@ -1064,7 +1064,7 @@
       <column caption='Watch Date (Fire Department Calls for Service.csv)' datatype='date' name='[Watch Date (Fire_Department_Calls_for_Service.csv)]' role='dimension' type='ordinal' />
       <column caption='Zipcode of Incident (Fire Department Calls for Service.csv)' datatype='integer' default-format='*00000' name='[Zipcode of Incident (Fire_Department_Calls_for_Service.csv)]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
       <column datatype='integer' default-format='*00000' name='[Zipcode of Incident]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
-      <layout dim-ordering='alphabetic' dim-percentage='0.556106' measure-ordering='alphabetic' measure-percentage='0.443894' show-structure='true' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.135314' measure-ordering='alphabetic' measure-percentage='0.864686' show-structure='true' />
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
@@ -1074,7 +1074,7 @@
     <mapsource name='Tableau' />
   </mapsources>
   <worksheets>
-    <worksheet name='Type of incidents in 94109'>
+    <worksheet name='Incident average response time by location in 2010'>
       <table>
         <view>
           <datasources>
@@ -1084,23 +1084,47 @@
             <mapsource name='Tableau' />
           </mapsources>
           <datasource-dependencies datasource='federated.1lpsf6n15307so17eu6k416r4z6s'>
-            <column caption='Call Type (Fire Department Calls for Service.csv)' datatype='string' name='[Call Type (Fire_Department_Calls_for_Service.csv)]' role='dimension' type='nominal' />
-            <column caption='Call Type Group (Fire Department Calls for Service.csv)' datatype='string' name='[Call Type Group (Fire_Department_Calls_for_Service.csv)]' role='dimension' type='nominal' />
-            <column caption='Zipcode of Incident (Fire Department Calls for Service.csv)' datatype='integer' default-format='*00000' name='[Zipcode of Incident (Fire_Department_Calls_for_Service.csv)]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
-            <column-instance column='[Call Type (Fire_Department_Calls_for_Service.csv)]' derivation='Count' name='[cnt:Call Type (Fire_Department_Calls_for_Service.csv):qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Call Type (Fire_Department_Calls_for_Service.csv)]' derivation='None' name='[none:Call Type (Fire_Department_Calls_for_Service.csv):nk]' pivot='key' type='nominal' />
-            <column-instance column='[Call Type Group (Fire_Department_Calls_for_Service.csv)]' derivation='None' name='[none:Call Type Group (Fire_Department_Calls_for_Service.csv):nk]' pivot='key' type='nominal' />
-            <column-instance column='[Zipcode of Incident (Fire_Department_Calls_for_Service.csv)]' derivation='None' name='[none:Zipcode of Incident (Fire_Department_Calls_for_Service.csv):ok]' pivot='key' type='ordinal' />
+            <column caption='DATEDIFF(&apos;minute&apos;, [Dispatch DtTm], [On Scene DtTm])' datatype='integer' name='[Calculation_1340313504360976394]' role='measure' type='quantitative' user:unnamed='Sheet 1'>
+              <calculation class='tableau' formula='DATEDIFF(&apos;minute&apos;, [Dispatch DtTm], [On Scene DtTm])' />
+            </column>
+            <column caption='Call Date (Fire Department Calls for Service.csv)' datatype='date' name='[Call Date (Fire_Department_Calls_for_Service.csv)]' role='dimension' type='ordinal' />
+            <column datatype='datetime' name='[Dispatch DtTm]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Incident Number]' role='dimension' type='ordinal' />
+            <column datatype='datetime' name='[On Scene DtTm]' role='dimension' type='ordinal' />
+            <column datatype='integer' default-format='*00000' name='[Zipcode of Incident]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+            <column-instance column='[Calculation_1340313504360976394]' derivation='Avg' name='[avg:Calculation_1340313504360976394:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Incident Number]' derivation='Count' name='[cnt:Incident Number:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Zipcode of Incident]' derivation='None' name='[none:Zipcode of Incident:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Call Date (Fire_Department_Calls_for_Service.csv)]' derivation='Year' name='[yr:Call Date (Fire_Department_Calls_for_Service.csv):ok]' pivot='key' type='ordinal' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Zipcode of Incident (Fire_Department_Calls_for_Service.csv):ok]'>
-            <groupfilter function='member' level='[none:Zipcode of Incident (Fire_Department_Calls_for_Service.csv):ok]' member='94108' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          <filter class='categorical' column='[federated.1lpsf6n15307so17eu6k416r4z6s].[yr:Call Date (Fire_Department_Calls_for_Service.csv):ok]'>
+            <groupfilter function='member' level='[yr:Call Date (Fire_Department_Calls_for_Service.csv):ok]' member='2018' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
-            <column>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Zipcode of Incident (Fire_Department_Calls_for_Service.csv):ok]</column>
+            <column>[federated.1lpsf6n15307so17eu6k416r4z6s].[yr:Call Date (Fire_Department_Calls_for_Service.csv):ok]</column>
           </slices>
           <aggregation value='true' />
         </view>
         <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1lpsf6n15307so17eu6k416r4z6s].[Longitude (generated)]' field-type='quantitative' max='-13618155.360558726' min='-13640212.048381619' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.1lpsf6n15307so17eu6k416r4z6s].[Latitude (generated)]' field-type='quantitative' max='4552899.7051024297' min='4535687.369574382' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.1lpsf6n15307so17eu6k416r4z6s].[avg:Calculation_1340313504360976394:qk]' palette='green_10_0' type='interpolated' />
+          </style-rule>
+          <style-rule element='legend-title-text'>
+            <format attr='color' field='[federated.1lpsf6n15307so17eu6k416r4z6s].[avg:Calculation_1340313504360976394:qk]' value='Average response time by minute'>
+              <formatted-text>
+                <run>Average response time by minute</run>
+              </formatted-text>
+            </format>
+            <format attr='size' field='[federated.1lpsf6n15307so17eu6k416r4z6s].[cnt:Incident Number:qk]' value='Number of incidents'>
+              <formatted-text>
+                <run>Number of incidents</run>
+              </formatted-text>
+            </format>
+          </style-rule>
           <style-rule element='map-layer'>
             <format attr='enabled' id='tab_base' value='true' />
             <format attr='enabled' id='um_lcover' value='true' />
@@ -1131,31 +1155,57 @@
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
-              <breakdown value='on' />
+              <breakdown value='auto' />
             </view>
             <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
             <encodings>
-              <color column='[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type Group (Fire_Department_Calls_for_Service.csv):nk]' />
-              <size column='[federated.1lpsf6n15307so17eu6k416r4z6s].[cnt:Call Type (Fire_Department_Calls_for_Service.csv):qk]' />
-              <text column='[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type (Fire_Department_Calls_for_Service.csv):nk]' />
+              <size column='[federated.1lpsf6n15307so17eu6k416r4z6s].[cnt:Incident Number:qk]' />
+              <lod column='[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Zipcode of Incident:ok]' />
+              <color column='[federated.1lpsf6n15307so17eu6k416r4z6s].[avg:Calculation_1340313504360976394:qk]' />
             </encodings>
             <style>
               <style-rule element='mark'>
+                <format attr='size' value='3.7458562850952148' />
                 <format attr='mark-labels-cull' value='true' />
-                <format attr='mark-labels-line-first' value='true' />
-                <format attr='mark-labels-line-last' value='true' />
-                <format attr='mark-labels-range-min' value='true' />
-                <format attr='mark-labels-range-max' value='true' />
-                <format attr='mark-labels-mode' value='all' />
-                <format attr='mark-labels-range-scope' value='pane' />
-                <format attr='mark-labels-range-field' value='' />
-                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-show' value='false' />
               </style-rule>
             </style>
           </pane>
         </panes>
-        <rows />
-        <cols />
+        <rows>[federated.1lpsf6n15307so17eu6k416r4z6s].[Latitude (generated)]</rows>
+        <cols>[federated.1lpsf6n15307so17eu6k416r4z6s].[Longitude (generated)]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 1 (2)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='subset' name='federated.1lpsf6n15307so17eu6k416r4z6s' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1lpsf6n15307so17eu6k416r4z6s'>
+            <column caption='DATEDIFF(&apos;minute&apos;, [Dispatch DtTm], [On Scene DtTm])' datatype='integer' name='[Calculation_1340313504360976394]' role='measure' type='quantitative' user:unnamed='Sheet 1'>
+              <calculation class='tableau' formula='DATEDIFF(&apos;minute&apos;, [Dispatch DtTm], [On Scene DtTm])' />
+            </column>
+            <column datatype='datetime' name='[Dispatch DtTm]' role='dimension' type='ordinal' />
+            <column datatype='datetime' name='[On Scene DtTm]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[Priority]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1340313504360976394]' derivation='Avg' name='[avg:Calculation_1340313504360976394:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Priority]' derivation='None' name='[none:Priority:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Priority:qk]</rows>
+        <cols>[federated.1lpsf6n15307so17eu6k416r4z6s].[avg:Calculation_1340313504360976394:qk]</cols>
       </table>
     </worksheet>
   </worksheets>
@@ -1167,7 +1217,7 @@
         <zone h='100000' id='2' type='layout-basic' w='100000' x='0' y='0'>
           <zone h='98000' id='5' param='horz' type='layout-flow' w='98400' x='800' y='1000'>
             <zone h='98000' id='3' type='layout-basic' w='82400' x='800' y='1000'>
-              <zone h='86000' id='1' name='Type of incidents in 94109' w='82400' x='800' y='1000'>
+              <zone h='86000' id='1' name='Incident average response time by location in 2010' w='82400' x='800' y='1000'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
                   <format attr='border-style' value='none' />
@@ -1177,7 +1227,7 @@
               </zone>
               <zone forceUpdate='true' h='12000' id='8' type='text' w='82400' x='800' y='87000'>
                 <formatted-text>
-                  <run>The different types of incidents that happen at each zipcode. The colors represent the type of incident, although most incidents are in an undefined group. We can see that the number of life threatening calls are still a large portion of the total incident calls, while very little are actual fires.</run>
+                  <run>The average response time of firefighter in San Francisco by zipcode since April of 2000. As reference, the number of incidents is represented by bubble size. The location with highest response time is 94109, the tenderloin, with around 15 minute response time, despite not being the location with highest incidents, which is 94102, the city center where the max number of incidents is 294,762.</run>
                 </formatted-text>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
@@ -1188,7 +1238,7 @@
               </zone>
             </zone>
             <zone fixed-size='160' h='98000' id='4' is-fixed='true' param='vert' type='layout-flow' w='16000' x='83200' y='1000'>
-              <zone h='15750' id='6' name='Type of incidents in 94109' pane-specification-id='0' param='[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type Group (Fire_Department_Calls_for_Service.csv):nk]' type='color' w='16000' x='83200' y='1000'>
+              <zone h='8125' id='6' name='Incident average response time by location in 2010' pane-specification-id='0' param='[federated.1lpsf6n15307so17eu6k416r4z6s].[avg:Calculation_1340313504360976394:qk]' type='color' w='16000' x='83200' y='1000'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
                   <format attr='border-style' value='none' />
@@ -1196,7 +1246,7 @@
                   <format attr='margin' value='4' />
                 </zone-style>
               </zone>
-              <zone h='2750' id='7' name='Type of incidents in 94109' pane-specification-id='0' param='[federated.1lpsf6n15307so17eu6k416r4z6s].[cnt:Incident Number:qk]' type='size' w='16000' x='83200' y='16750'>
+              <zone h='15750' id='7' name='Incident average response time by location in 2010' pane-specification-id='0' param='[federated.1lpsf6n15307so17eu6k416r4z6s].[cnt:Incident Number:qk]' type='size' w='16000' x='83200' y='9125'>
                 <zone-style>
                   <format attr='border-color' value='#000000' />
                   <format attr='border-style' value='none' />
@@ -1217,7 +1267,7 @@
     </dashboard>
   </dashboards>
   <windows source-height='30'>
-    <window class='worksheet' name='Type of incidents in 94109'>
+    <window class='worksheet' maximized='true' name='Incident average response time by location in 2010'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1239,255 +1289,44 @@
         </edge>
         <edge name='right'>
           <strip size='160'>
-            <card pane-specification-id='0' param='[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type Group (Fire_Department_Calls_for_Service.csv):nk]' type='color' />
+            <card pane-specification-id='0' param='[federated.1lpsf6n15307so17eu6k416r4z6s].[cnt:Incident Number:qk]' type='size' />
+            <card pane-specification-id='0' param='[federated.1lpsf6n15307so17eu6k416r4z6s].[avg:Calculation_1340313504360976394:qk]' type='color' />
           </strip>
         </edge>
       </cards>
-      <viewpoint>
-        <highlight>
-          <color-one-way>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[cnt:Incident Number:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[mi:Dispatch DtTm:ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504359186432:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504359223298:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504359264259:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504359788549:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504359813126:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504359845895:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504360882184:ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Calculation_1340313504360976394:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type (Fire_Department_Calls_for_Service.csv):nk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type Group (Fire_Department_Calls_for_Service.csv):nk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type:nk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Incident Number:ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Location:nk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Zipcode of Incident (Fire_Department_Calls_for_Service.csv):ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Zipcode of Incident:ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[tmi:Dispatch DtTm:qk]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[yr:Dispatch DtTm:ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[yr:Entry DtTm:ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[yr:On Scene DtTm:ok]</field>
-            <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[yr:Received DtTm:ok]</field>
-          </color-one-way>
-        </highlight>
-      </viewpoint>
       <simple-id uuid='{62D94082-0514-4F2F-8BDB-EDE052DAE021}' />
     </window>
-    <window class='dashboard' maximized='true' name='Dashboard 1'>
+    <window class='dashboard' name='Dashboard 1'>
       <viewpoints>
-        <viewpoint name='Type of incidents in 94109'>
+        <viewpoint name='Incident average response time by location in 2010'>
           <zoom type='entire-view' />
-          <highlight>
-            <color-one-way>
-              <field>[federated.1lpsf6n15307so17eu6k416r4z6s].[none:Call Type Group (Fire_Department_Calls_for_Service.csv):nk]</field>
-            </color-one-way>
-          </highlight>
         </viewpoint>
       </viewpoints>
-      <active id='-1' />
+      <active id='8' />
       <simple-id uuid='{E2B650AC-BE4D-4EF6-BF50-09CA377A6E2C}' />
     </window>
+    <window class='worksheet' name='Sheet 1 (2)'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{75195575-32E9-4EA0-8B39-8272755F0CCB}' />
+    </window>
   </windows>
-  <thumbnails>
-    <thumbnail height='192' name='Dashboard 1' width='192'>
-      iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAACXBIWXMAAA7DAAAOwwHHb6hk
-      AAActklEQVR4nO3d+XMc553f8Xd3T899AxgcBEjwPkSJjkXKh7Quy+so5V0nm9TGjquS7J+Q
-      3/Jbfkrll1QlqUpV4mylso5ra52yN+tYXmtjr8t27JUlS6IskxIPkASIcw4M5j76mD6e/ICD
-      AEFQlEgRlPp5/cKZnu6nv8+D+WCeZ9gzUIQQAkkKKHW/C5Ck/SQDIAWaDIAUaDIAUqDJAEiB
-      tiMAP33lB/yX//pN/vbnv/7ADXlWi2/+6X+j2uhTL82zstq5537zN96jY/sAVG9d5r3Z2j33
-      69VKFGu9+x6/SfgO3/nzb/Nn3/oWfcdDeAP+w3/8z3jAq7/8Ca/8+OcA/OB/f4c/+9a36Jjm
-      jv2l4Aptv/PSV/8JnZdf4csvnONnv/wN50+Ocnu1wxtvvkNUV/j6N/6YH37/h/iRNP/y639E
-      v7HKX/71TwgnshwbEnQMD0VVUT0H0/X43ne+je34fObFP2D2d39Hz4lx7uQ4nhC8/L2/oF6t
-      cPbFb/C9v/gOjgIvvfAsP/x/v0XRNA4nTC4Vff7xV77Aq79+g6ljp/j9Fy4wsG084fHtP/0m
-      fijCV77+J6R68+QPP81nD8d57eIV/MoMmWQegOMnnuGdi2/imzXcyARff/4Af/vKD3bs/9Ln
-      z+3H2EtPgF1TIAFokRSl+Vle/c1Fjk2PMHXqKb58/iQ/evmntJ0wveJt+h6888br/KNv/Asm
-      wh6HTpzks8//PiPZGINek0bHIpLL8s+/9hVu3r5O303zz772D+m0KvQ6ZcTQYb765d/DrM4z
-      X2vjmB1mF8o8c/5LjEejnDp9hhde/AMmhpM4roeurZfablUwXY/80DR/+PwzLC3VSY4fwyrP
-      8uOf/oK14g1evbJAe63E3PwiYxMTAHiORSQVJ5ZKEc4f3Nrf85zHOuDSk2VXAFRFAeCFZ49w
-      ozIgoatceutN/vqXF/m9F55F2F2Gp6YJq3DkxFFe/t5f8e5ylXhIhY1jAdh2U9XidKuzvPzy
-      /8UH1HCaxXd/y09/9RrR/BhxTZDNDZNNhtcP0FQSuWHe+vWPKa8ajIzkuH7lXbY3rijrYUVT
-      QVGJRGK0+y5ffumr/Jt//a84dvQIU5MFfvSD/8Pbv3uHm6supUu/4dt//n3OnX16a//zn3r6
-      kQ+q9PGh7PU/wa98939w6MIfcmYMXnnzNl/94ufQVBXPcwEVbeM38mBgo4V0NPX+62khfDxP
-      EAppAHiui1AUQpqG73n4QEjTdhzjOg5aSMdxbEKhMKqq3KPldc7ARtFCu9rYzvNcPF8Q1vUH
-      2l/65NszAEIIFGXvJ5wkfRLs+WtbPvmlIJD/DyAFmgyAFGihuzesNvv84p35/ahF+ggVsgme
-      OZng7+Z+sd+lPFF2BaDa7PPdn1/Zj1qkj9DZwwXGDxT4/uXv7ncpTxQ5BZICbdcrwKax0RxT
-      cYX8aJ7fXS0iFIEeiXB0IsPCSp1IOIThgWF6TGUUhAhR6g9IhMBBI6Gr1FoGnz85yjvLLWxr
-      QCGfwBEKaRwur9z7WiHpozeaPc5ERCWXPcm7S68BPrqeZjp/jKXaVcJ6BMuHvu1xIKEiRJiK
-      1ScR8nEIE9eiNPoVnjvwKS7X5hkMeoykCgyERhqDK/XF/e7iA9szAPFYmIlUmPxQksKnD1G3
-      XDzTZBCL8dJnDvPj12Y5Pj1GRI9Sr5WJhMJkRtL4tkc6rlG3fI6MZrDtAV84N41h+bTaLXL5
-      BAs3Pj4D9EkUDacYi6bIJw8wfORLNAYunlPBDQ/z4sl/wM+u/4gjhfNEQnkanTeJaGky6Wl8
-      1yUVUWkOfKYzB7GdLp+bfglz4NAxFsim8iwVX93v7n0gewag0exxw4nirrXRQ2EQHql0nHap
-      TqkoODicpGMPsFoGrbZNSHVx2gaKJxgfTmPbNh0HhpM6NxbXGDgetXaPZKNPNh4H7MfYTWm7
-      Vq/ErJvG6ywR0hIgbJLxAt3GVcoNn8n0BF2nS62/SttoEVJMnH4VxYfR9AS206fjeQxFY8yu
-      vYvjDmgYFeK9JNnIMNDY7y4+sD0D0Gr3abX7d21tPlCj5cady5hv3vVYrW0+aG3SR6RtVGgb
-      lZ0b67ce6NjV3srW7bm7HqsbVZYfsrbHTS6CpUCTAZACTQZACjQZACnQZACkQJMBkAJNBkAK
-      NBkAKdBkAKRAkwGQAk0GQAo0GQAp0GQApECTAZACTQZACjQZACnQZACkQJMBkAJNBkAKNBkA
-      KdBkAKRAkwGQAk0GQAo0GQAp0GQApECTAZACTQZACjQZACnQZACkQJMBkAJNBkAKNBkAKdBk
-      AKRAkwGQAk0GQAo0GQAp0GQApECTAZACTQZACjQZACnQZACkQJMBkAJNBkAKNBkAKdBkAKRA
-      kwGQAk0GQAo0GQAp0GQApECTAZACTQZACjQZACnQZACkQJMBkAJNBkAKNBkAKdBkAKRAkwGQ
-      Ak0GQAo0GQAp0EL7XYD0+JwZO8v/+pOX97uMJ4oMQIB41RnsX/37/S7jkdDP/BGXs8/y2+Ly
-      Q7UjAxAgwu7irVzc7zIeCW3yAs3IaW436g/VjlwDBJQQAs8XCMR+l/KREL6H7+/sm+95u3or
-      XwECSfDff1Xn84eSjA6rrLR8dNXHcaFrecQiIUJCcGg0wlBc2+9i39fyG6+TnD7D4luXGD1W
-      IDk0zOq1txlkTnJgLIYjVJzGGoNBnKlnj1K/Nc/A6RHJjMhXgCAqrdoMpXWurTkUGy6zqwbN
-      niAaUSnEdaIomK5Po+fud6kPJDY0RuWdt8hNH6KxskLp4iWGjx/F67s0Wh3ywwk6vQ7NUmfj
-      CIEaz9C7fk2+AgRRKqPzT0ejVNoOmgKRmMbBtI6qgvBBUWCp6jOU0fe71AeSmZwgPjpEKBSh
-      nxOEU3lay0WOnDuMyoBWvUc6lWfi5BQKkDkwjlAVKBRkAIIoFV2f1oxtPMFH0rv3OTUVf5wl
-      PRQ9FkWPRQEIx48AkMhmNx6NE0tnYWL8zv7x2NZtOQWSAk0GQAo0GQAp0GQApECTAZACTQZA
-      CjQZACnQZACkQJMBkAJNBkAKNBkAKdBkAKRA23UxXCKqc/ZwYT9qeewSUZ2+5ex3GY/F4fEs
-      4O13GU+cXQHoWw5X5qv7Uctjd/ZwITB9BeBcar8reOLIKZAUaPcNwIUTY0wUMoQfVzX75NBY
-      jmcPDzOSid7z8Xwmds/t2UyS88cKjKXufZz05NvzAzF6NMYXPn2Qi1eLFBJRXnxqlKWuj++a
-      pCIRmj2LTD7Lby5eZ65uPs6aH7lYPEI8DC89d5Rmx8RBpdPuMJ2NMVs3OX2kwOJSlYGA6akx
-      IqqPZdpcXOwwntAQI1me//QwiudRSCp88yfX9rtL0gPaMwCHCgn+6mczPH2igGcb3Fxtc6vU
-      Qw/5KC7YKCTaNpl0FD7mARgMHPRklNlSG9Wzubpq86Uzo9TbPXqGzeJqDzUUJio83rlZJJ+M
-      45gGluXz2pUmw2NDvDdbJhLVqckXg4+VPQMwu1QDYLHW2WuXT4zbK3Vur+zc9vJrd/p9o9i+
-      64id30XTKD7cd9NI+0cugqVAkwGQAk0GQAo0GQAp0GQApECTAZACTQZACjQZACnQZACkQJMB
-      kAJNBkAKNBkAKdBkAKRAkwGQAk0GQAo0GQAp0GQApECTAZACTQZACjQZACnQZACkQJMBkAJN
-      BkAKNBkAKdBkAKRAkwGQAk0GQAo0GQAp0GQApECTAZACTQZACjQZACnQZACkQNvzL8RInzxK
-      JIU2eWG/y0BJTyA6pYfaT01PPJJaZAACRNhdvJWL+10G2uSFB6rjfvtpkxdg5PRD1yKnQFKg
-      yVeAAFqq2txsOeRiKgfSOqqikI6t/y5cajis9V1OjEZJhRUAepZH0/Q5Xgjz40sdDo1FOZjX
-      6Vs+9b7LmfGP75/GlAEIoNG0xqWSRSyiEvVc3u4oTEQEs0sGz5zOojs+lbbNmqqw1HDwHB/T
-      UzlW0BFC0O54vFa3SakKi4bH2HCEvK7sd7c+FBmAADIcQTqmMpFUWbXhwmSEa4tdjk/FWFyz
-      GY0r2J5CzfD41FQcVfjMNVwUFJ47mkQIcNHJhxUGixYJbb979OEFOgCFXIKzFB5JO9Vm/xFU
-      9MHa2mvfe20/PJ4FPAByKZ0vntR3PP65o2kA9lpWFtJhAIbTO58yXzyVfKBan1SBDkC12efK
-      fPWh2zlL4ZG080Hb2mvfPds4l3rY8j5x5LtAUqAF+hVg0/RkgVMjOhfn20Q0QAi+dP4IjuVS
-      rdZ5e6VDQoNK27pvO+l0kvPTWRrtLuFUmkajh2k6qJogFInQaPYo5OLcKrYeT8ek9yUDACxU
-      ugyFwrxwbpJiucPh4QSVcpOBUFB1jc8cL/DW9fL7tjM5muHtKyucPTWK0BSS6Ti21eP0dIGp
-      fASBYGa1y3Kxxf2jJD0uMgAAnkOpJSj2iyRiEbSaR6nWw0VB0wSxaIyRdISO5dy3mZsLVZ47
-      M0m73cEWHio+mVSY2WKNnpHAtC2WmxbuY+qW9P5kAACES7nlAhbQZW7XDg/2rozrOLx+ZeWe
-      j90uN7duKwogPkSd0iMnAwAcPzjCSExhds3EsSxOnZrC6bVZrRkIRUVBJRTRqTd7jA0luLnS
-      3LOtP37hOH9zcZHRdBhH0VARePaAcCTM5GiWt68t8czxCd6ZKW28KSntJxkAYCge5vWZIs+f
-      O0gEHxEJE9ESTGdiVA2PQTiNZjX4++fPcm2uRqfSpHKPeUw6l2V6IseXz1oMBj4ilsB2B2QU
-      B3ugYKPg+hDSCPSTXx05+cD7bl69qo6cxF+7cacNeTXoo3O71uWzJwp0+w51w8BUTBAOdU1D
-      1VSqlQrHDmR5471FKk0Lw793Oynd5z/95Vs8d3ocMXAxDBdf+FQtm3QsgonK+OgQ9Urj8Xbw
-      CeOv3fhQV6VuP+ZRXQ0qAwBUax2qtc599ynX2+/bTrG63sab93nHKBHTWTHvv5iWHh8ZgMes
-      L5/8H4qSntjxYZ5HNQWS/xMsfSyITmlrCuStXMR/gE+UPQj5CvAIJKI6Zw8//EV1m2190n2Q
-      RfAmJfLRXMckA/AI9C3n0V0M94iC9CT7MIvgj+qzzDIAT5gHuUQ7EdXpW86ufe/evnkfdl4O
-      Ld0hA/AI6eEwnz05yu2VBqYzIJmKs1R+/3ePtnuQS7TPHt643Hn+/tu37m/6GF8OvbkI3pw+
-      qekJcrE4R/JDD9WuDMAjdPzQCL+7ssxzF56iEOoziCQ4Oj7CM0eG6LZ6vDtf4e25+n6X+bF0
-      9yJYm7xAM3Ka242HG08ZgEeoWO3w+XMHKVYqaLkoC8UKmhohsyJom9a+P/mflO8F+jCL4K3f
-      /PIV4MnVbnf56aUuAFeX7myfmd/jgEfs7nej1uf9d25rhVPEv/Y/H08xj8F54PyBqYdqQwbg
-      Y+pe7xYlYmHevF7csW37GsC6do3qv/13H3ltH0bkzGnsa9cf+3llAD6m9vos8HZ3vwJIu8kA
-      fILNl1s7g3JkbP+KeUIpQogdH83omQPmy8H4zOr298mfhHYetK299rl7+/b7iajOdCbMYHHx
-      kdT5qKnxOL5hPPbz7gqAJAWJvBhOCjQZACnQZACkQJMBkAJNBkAKNBkAKdBkAKRA2xGAfq/N
-      jRs3KK/Wdu3Y63Tp9Hs0alWq1VVqzb2vc3e99S/N8bwH+wBGo1alZ1h0+72d5+yu32+1dn4R
-      1Wb7AEJ4eJ5Pt9fb9Xi3232g8+/V9t22nwMEve69vzHOtbp0zTvt3G9ct1pzzR3HPIzNcfc8
-      D9fsYTrbvsdF+O/7c/Eci2J5bWv8N22OZ7ezc1w91931RXfdbhfXc+8as7v2uc9j66V6eL5g
-      YPSxvTtn8GwDw/bodbr4Ow94374Z/R7bmtr5H2FCCObmZnGsPoarkIxoqJEkmXiIS5fnOH32
-      BMu3ZxkIGMnlsDxBTLFAT2IOXJK6j6uEKJZW+cLzn+G131zk6NFpVOFQKjVIpOMYpkMyoTM0
-      fADHaLLaMhh0W5z99AV6zQqLS6sM5dL0XZWx4STVcpm+YRDSo8RTaSzbxuw2GBoeJRJPMRy1
-      ea8kEEaJ8bFJus0addPh6TNnaFaW6LsK40MZeqZJo9ZhZCjJWssgHk8iFAGOTSyVYWIky7XZ
-      Zex+g3PPfo7y0ixqJIHTbeBpcSKxGKvlRcYnjpBNaKxUG4ykVBYrfVKJGJF4nG6jSiqdpVZe
-      hMw0EWXAs596es9xTUdV2qZLt1Eln4tTbodQfJNMIoTrKIQTaU5MZfn1pQXyUZ9ISKfes0ik
-      kmjCo9cziMaTZLJpGpUSSiiCZVm4uJw68RTzt64ymolzq9pnfHwMZzDg5KEh3rhU5PDUMIPu
-      GnXD3xqLp44c4LdXZnANi9ETZ0goDp3GGn4oitlpkxoeR3X7lKs9hrJh9JBCtWlgdGxOnTvN
-      5OgI9WqFUrVFVPeYX14ll08RCafA7RGNRUgPT1FdLtLtG4RjEAmnODmZ483LcyjhMAcKGbrG
-      AByTKA795BRnRkLcqnSwLZNURCWbSbHacaksFTl6/ACm7eFaHXRVYa0TIpdwOXT8DHa3Qa1j
-      0l0rkhkZR9FCZONx7EGftVaf83/vmZ2vAIqioCgK4ViSbCrB8sICrU6fXreLrikYPZNC4QCT
-      ByZQXINisUw4mQO7S7FYRosmiEYiZJNx9GiCRDSC3W1ie2AaDuXSMsulIo4zYHGlSL9nYvQN
-      CoUDpBNRjG6HkcIU9XIVLaRhGh16PRur3+H2wgI90yGXTpDN5IjqKjO35khl84QUn7HxSexG
-      hZmbN0BNAKBv9OPGzDVWSiuYhkO3WcMWPktLy5RX6yTiaTThU1pZ4tbcHNlMDgXB8sICzdoq
-      7169ztLCKqqqMTY+CY7DysIsyewwRreFOfBZK9dQFYFlCUpLyyhaiNpqmWKxTKNe33tc272t
-      43qdLr1WB2FZCD3BwQMjXL82g3AtDkwdYXZmhk6jji186m2bg4UMtxcWcJ0Bt2ZvcfPmHPVG
-      n4OFIeKZHKCQzeVAKExPjrGwUqa8WieayBLVVaors4TC8R1jYfU6CFR0Jczo6AimYRCKJghr
-      HqbpYZomptFHVWBhYY52p8HY5DRhQnhAo9Fmfm6W+aUiWmj9eZBK54nrOkbPwOq2mbl2lWqt
-      iWUYpDJ54noY1zLI5IbI5fJ0TQPTNrH6HfoDHwWBZ1t0HEEuncDoWyg4rK010TWF1WqJSq1O
-      Ip0nEkkQ1cHqdyhV1rg9e4PllRIjE5PUVm5Tr7UweyaWD7l0An/Qvf+lEEL4wPoPz/d9VHXn
-      kmH7tp23Baq6fszi/AIHpyeo1W1GCxl831//clgUFAU8T6Bpu5ciQogd593e/mbJQoiNx9bP
-      t72OXdsYsFqzyUYdTD1LNqZt7KNunhB/45wbGwBl6xxC+CjKXf23O9TMMIVsFCF8fB80Tb1n
-      zXuN6/bjAHzPQ9W0e46v02ts1B7a2rbexnq9O/sCqsL6v+r6t/Fu9tf3fRYXFpgYTu8ai+3n
-      v9fPQ/g+QlFQhABFZXO4XKuH4YZJxUOgbD5ntv0MPA9F0xC+j9lrc3ulwtNn7vHNbkLgCYEC
-      9xzDzZ/91nNDUbb1cX1M2HasoqooG8cJQFV2/jG/970WqNvpkkqnAJ/l5SK5XJ5kMrFjn1ar
-      STabu18zW4x+HwUfLRLDHXjE45EHOm47z/MwDINUav0zrsL38FFR8fERGIZLKvn+f7qz2+2R
-      St37b1x1mnVEKIa68UHyZrPBwYOHts5vGSaxVPKe7yJ4rosW2nahrfDoGgNSidh9awGx1ac9
-      CR/PF5iGidiYeW+Ng2vSc3RSsQe/yNf1XEKqsmd9nmNRqXUZK+QRAxMnFCembwZtvRZN0+66
-      7dLtuSi4JLeNb7fbJZVKbXtObZzDdVFDIbY/NV2zR8sS5HOpe45xt9slHtboWw56PHWnpr36
-      afZoDwSpRBxdA99XMAxjZwCs5iot26feM+jW2wzl46xWe2STKiFdY62jcmQsxGKlQzKewfEd
-      0lGVYq3Dp04e5tqN2wyPDWEbJoZlkxuZIB0N0W6s4apRnjp9grmZ6xjOALvdRR8ax7UNzp08
-      xDvX5pkcH6LZMRl0a+THD+H028SSSUrFMtF4ioHr8vSpI7z6+kWyyTDxbIGQZ9KpVVFGTzKh
-      1Cl5URpLq0xNjtDu9nj62fPM/O4NsrkMsdwExflFHNdEj8RxjA750TH6zQaKHkGLJiikdG6X
-      agjb4Mwzn6a+ViYc0rgxt8TYUIr08AFWl2dRhI6LYHgki9m3MK0BBw5O0qg1WSuXmTpyENvx
-      ca0OqVQG1RGUG3XyhVE63S4Xzp3i7bevMjpRoNu3iCgarlWj6cb5zLNnmbv+Hl3DQ4/HcXst
-      Rg8dpVMvEQuHmC/ZnDxWoGeYqAiyqSSlaoszh7PcrEC7ViSTCqEoERr1BvmxAq7jcWw8y6Ub
-      S8TicRzPJ65YrKx1OPfMadq1Ls1eCz2SQsHn6eNTO9YDzaWbe6wnyuRTLmoIas0QRydTDDwH
-      QZ5Ewl1fQ+gJHKOFHs8TVgZ7riGwujhKFLdfR9gWdT9LLuGSzgwzMTbC8vISzWaLfH6I+dlr
-      TE4ewHcUGr5GWLgcm8jT6DtUm10iuobRXiOdmyAe1xnSXW51dKzGIoV0hJKVYTTq7AyX71pc
-      uXqVRt9jNJvFMPqois/szAxC1RgfLtDvrs/7Fm7MUiyW6Wy8E2IYBp5pYPoahWwWVXgUy6vc
-      mLuNaZlYpk2z3eTQoVEq9QG1Xh/dqlMslrF6XYTQmLu1PmdL50dwbQNFeMzeusnN+XlKywsU
-      i+WttUVmqEBYdbn87lUcIVAQZHJ5FCGYPnKMemmFxeUiri/W27M6zFy7SqVhMDIyTDYdR0XF
-      Mrvr8+d6n9OnjtFpdxGWRa4wTjadQAEs1+fwoXFmZ2bo9831uTUhDhaG6PkahWycxeUit27e
-      Yn65TCaTZHX1ztxUOBbdRovRsQK1dh/D6CNcG8P1uT233mcAVY+wPDuD6ztcfvcqS0slTp88
-      xM2bc1i2g3AGVFp9ojqYG5cOK7A17waorCxz4+YchBOk42E806C0UYtvG9jCp1brYvQNIskc
-      xw5NgnCprbZQhUfXFKTj0V3rgb3XEz5GzwARJqrDtatXqFTXALFtDSEwehaG0b/PGkKh1zMI
-      aT6X371KrdFAQaAKj9nbCzQabRTXpt3oUKp1mJg6jGs2MWyPWnV1fT2XL3D58hVco0alVic3
-      PEY2DtVmD1CwegaZXI5kdoiQ4oNn754C7Zhrb8z3EGJrLnX3vutTKhXL6HJzbomzTz+FpoDn
-      +VvzstpaleGRwrb59e7zCeGzPq28c57dc/3dc+u7t+21LrnXfeH7oKqIu/fbYx68NafcnGOr
-      ys7HYP2vXwgBG3Pz7fsANGtrlGtNzpw6cc8+368fm2uHzfHY0Y+Neff2ub7Z3/yZnEER4PTq
-      W3P+7Wuvzbm65/k71mM7xmFHn3euJxBia34P7LnuURR1zzXEnT6KHf0TQuDZfQw3TDoZ3tXu
-      Rutb9YiN9cNmrbXKMnpqlEwivKMf63UqH+zzAJtzbXwHT6iEdfmBMunjbccz2BsYXJmZZ3J8
-      mHqzQ6W6xjNnz6AAa6tFcpkYTb/AyrXXyY8fopCN0jUcHB+SOsSyI4zkM/vUFUn64HYEoNNs
-      0KmtcMn0ePHCWVRFUKut4Xs2rVaXbnuN9FSByYPHUDSftXYP3zCwhY6eDuO02+QyKUL3eFtT
-      kp5EO6ZA7sBkYbHI2Pgora6BP7CJRkN4Shir22KkMIIWToI3YHPSGlIFS6UqMV0hGk8SiaZI
-      xPeaq0nSk+X/A8fd91SMeK6sAAAAAElFTkSuQmCC
-    </thumbnail>
-    <thumbnail height='192' name='Type of incidents in 94109' width='192'>
-      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
-    </thumbnail>
-  </thumbnails>
 </workbook>

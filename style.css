@@ -26,3 +26,19 @@
   color: white !important;
   background-color: #C70022 !important;
 }
+
+
+.vis1-gallery {
+  display: flex;
+  max-width: 100%;
+}
+
+.vis1-gallery .vis {
+  flex: 33%;
+  width: 33%;
+  height: auto;
+}
+
+.buttons a {
+  margin-right: 10px;
+}

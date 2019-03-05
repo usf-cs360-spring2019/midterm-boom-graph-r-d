@@ -23,7 +23,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          SF Fire Call Logistics by Boom-Graph R&D
+          SF Fire Call Logistics by Boom-Graph R&D: Average Response Time by Location
         </h1>
         <h2 class="subtitle">
           Samuel Escapa & Sameer Isaq
@@ -36,7 +36,7 @@
       <div class="container">
         <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
-            <a class="navbar-item" href="#top">
+            <a class="navbar-item" href="index.html">
               <span class="icon">
                 <i class="fas fa-home"></i>
               </span>
@@ -44,29 +44,18 @@
             </a>
           </div>
           <div id="main-navbar" class="navbar-menu">
-            <a class="navbar-item" href="#dataprocessing">
+            <a class="navbar-item" href="#prototype1">
               <span class="icon">
-                <i class="fas fa-database"></i>
+                <i class="fas fa-adjust"></i>
               </span>
-              <span>Data and Processing</span>
+              <span>Prototype</span>
             </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                <span class="icon">
-                  <i class="fas fa-chart-area"></i>
-                </span>
-                <span>Visualizations</span>
-              </a>
-
-              <div class="navbar-dropdown">
-                <a class="navbar-item" href="vis1.html">
-                  Average Response Time by Location
-                </a>
-                <a class="navbar-item" href="vis2.html">
-                  Incident Call Type by Location
-                </a>
-              </div>
-            </div>
+            <a class="navbar-item" href="#vis1">
+              <span class="icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+              <span>Visualization</span>
+            </a>
           </div>
 
           <div class="navbar-end">
@@ -77,7 +66,6 @@
               <span>About</span>
             </a>
           </div>
-
         </nav>
       </div>
     </div>
@@ -86,32 +74,42 @@
   <!-- todo: add sections as necessary -->
   <section class="section">
     <div class="container content">
-
-      <h2 id="top">Our Project:</h2>
-      <p>
-        We chose to investigate the logistics behind calls to the Fire Department. What does this mean?
-
-        <br>
-        <br>
-
-        From fires to medical emergencies, we will visualize the difference in response time based
-        upon the type of call that is made. In addition, we will analyze the role that districts play
-        in response time (i.e. is the Sunset responded to faster than the Tenderloin?) and investigate if the priority of an
-        incident changes based on its district.
-      </p>
-
-      <h2 id="dataprocessing">Data Processing:</h2>
-      <p>
-        The data set is a database of <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3" target="_blank">SF Fire Department Calls for Service</a>, representing the fire unit responses to calls. Each row represents a call that has values from Location, Call Type, priority, response time, among many more.
-        <br />
-        We will narrow our data to a few locations that have high response rates, as well as finding locations with low response rates. These two will be used to generate Visualization 1.
-      </p>
-
-      <h2>Our visualizations:</h2>
-      <div class="buttons">
-        <a class="button is-medium" href="vis1.html">Average Response Time by Location</a><br />
-        <a class="button is-medium" href="vis2.html">Incident Call Type by Location</a>
+      <h2 id="prototype1">Prototype 1</h2>
+      <img src="./prototypes/visualization1.png" />
+      <div class="vis1-gallery">
+        <div class="vis">
+          <img src="./prototypes/visualization1-2000.png" />
+        </div>
+        <div class="vis">
+          <img src="./prototypes/visualization1-2010.png" />
+        </div>
+        <div class="vis">
+          <img src="./prototypes/visualization1-2019.png" />
+        </div>
       </div>
+
+      <h2 id="vis1">Visualization 1</h2>
+
+      <svg width="100%" height="400" style="background-color: whitesmoke; border: 1px solid black;">
+      </svg>
+
+      <h3>Interpretation</h3>
+
+      <p>
+        This visualization demonstrates all the fire-fighter incidents since April 2000. We can tell that there are many more incidents in the city center, which is represented by bubble size. Color represents the average response time, darker being highest at 15 minutes and light gree as lowest being 3 minutes.
+      </p>
+
+      <h3>Discussion</h3>
+
+      <p>
+        We can see that this data visualization demonstrats that the Tenderloin, despite not having the highest number of incidents, still have the highest response time in all the city. This could explained by either a lack of full attention of the Tenderloin by fire-fighters or just the fact that there could be less firestations.
+      </p>
+
+      <h3>Credit</h3>
+
+      <p>
+        Data from: <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3" target="_blank">SF Fire Department Calls for Service</a>.
+      </p>
 
     </div>
   </section>
