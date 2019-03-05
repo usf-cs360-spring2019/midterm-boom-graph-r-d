@@ -44,12 +44,6 @@
             </a>
           </div>
           <div id="main-navbar" class="navbar-menu">
-            <a class="navbar-item" href="#dataprocessing">
-              <span class="icon">
-                <i class="fas fa-database"></i>
-              </span>
-              <span>Data and Processing</span>
-            </a>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
                 <span class="icon">
@@ -67,6 +61,12 @@
                 </a>
               </div>
             </div>
+            <a class="navbar-item" href="#dataprocessing">
+              <span class="icon">
+                <i class="fas fa-database"></i>
+              </span>
+              <span>Data and Processing</span>
+            </a>
           </div>
 
           <div class="navbar-end">
@@ -89,25 +89,24 @@
 
       <h2 id="top">Our Project:</h2>
       <p>
-        We chose to investigate the logistics behind calls to the Fire Department. What does this mean?
-
-        <br>
-        <br>
-
-        From fires to medical emergencies, we will visualize the difference in response time based
-        upon the type of call that is made. In addition, we will analyze the role that districts play
-        in response time (i.e. is the Sunset responded to faster than the Tenderloin?) and investigate if the priority of an
-        incident changes based on its district.
+        We are investigating whether the location of a particular incident affect the average response time, as well as analyzing what incident types each of these locations have.
+      </p>
+      <p>
+        We will analyze the data from the San Francisco Fire Department database where each row represents a particular incident since April 2000. Each of the database's entry contains the response time which is calculated by the initial call time and the first responders time arrival.
+        With this data, we will visualize any differences in location treatment, and see what incidents are more prevalent in each Zipcode.
       </p>
 
       <h2 id="dataprocessing">Data Processing:</h2>
       <p>
         The data set is a database of <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3" target="_blank">SF Fire Department Calls for Service</a>, representing the fire unit responses to calls. Each row represents a call that has values from Location, Call Type, priority, response time, among many more.
-        <br />
-        We will narrow our data to a few locations that have high response rates, as well as finding locations with low response rates. These two will be used to generate Visualization 1.
       </p>
-
-      <h2>Our visualizations:</h2>
+      <p>
+        For visualization 1, we plan on filtering the data by year in order to demonstrate the changes in incident numbers as well as response time for each year, and group them by response time which is calculated by first call time and first responder time arrival.
+      </p>
+      <p>
+        For visualization 2, we filter our data by Zipcode, and categorize by call type and group type. We want to demonstrate the different types of incidents per zipcode which could explain the longer response times (or shorter) for each neighborhood.
+      </p>
+      <h2>Our Visualizations:</h2>
       <div class="buttons">
         <a class="button is-medium" href="vis1.html">Average Response Time by Location</a><br />
         <a class="button is-medium" href="vis2.html">Incident Call Type by Location</a>
@@ -124,7 +123,7 @@
   <section class="section">
     <div class="container content">
       <h2 id="about">
-        About the Team
+        About the Team:
       </h2>
 
       <div class="media">
