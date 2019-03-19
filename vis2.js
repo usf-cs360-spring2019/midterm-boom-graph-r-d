@@ -157,10 +157,83 @@ function updateGraph(data) {
       .attr("text-anchor", "start");
 }
 
+function transformGraph(newData) {
+  let data = newData.map((row) => {
+    return {
+      ...row,
+      "Alarm": row["Alarm"] / row["callCount"],
+      "Fire": row["Fire"] / row["callCount"],
+      "Non Life-threatening": row["Non Life-threatening"] / row["callCount"],
+      "Potentially Life-Threatening": row["Potentially Life-Threatening"] / row["callCount"]
+    }
+  });
+  let x = d3.scaleBand()
+      .rangeRound([0, width])
+      .paddingInner(0.05)
+      .align(0.1);
+
+  // set y scale
+  let y = d3.scaleLinear()
+      .rangeRound([height, 0]);
+
+  x.domain(data.map(function(d) { return d.zipcode; }));
+  y.domain([0, 1]);
+
+  d3.select(".graph")
+    .selectAll("g")
+    .data(d3.stack().keys(keys)(data))
+
+  d3.select(".graph")
+    .selectAll("g")
+    .selectAll("rect")
+    .data(function(d) { return d; })
+      .attr("x", function(d) { return x(d.data.zipcode); })
+      .attr("y", function(d) { return y(d[1]); })
+      .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+      .attr("width", x.bandwidth())
+
+  g.select(".y-axis")
+      .call(d3.axisLeft(y).ticks(null, "s"))
+    .append("text")
+      .attr("x", 2)
+      .attr("y", y(y.ticks().pop()) + 0.5)
+      .attr("dy", "0.32em")
+      .attr("fill", "#000")
+      .attr("font-weight", "bold")
+      .attr("text-anchor", "start");
+}
+
 // Load per year data
 $(".year").click((e) => {
   $(".year").removeClass("is-primary");
   $(e.currentTarget).addClass("is-primary");
+  if($(".transform").hasClass("is-primary")) {
+    let year = $(".year.is-primary").attr("id");
+
+    // Load corresponding year
+    switch(year) {
+      case "2014":
+        transformGraph(sourceData2014);
+        break;
+      case "2015":
+        transformGraph(sourceData2015);
+        break;
+      case "2016":
+        transformGraph(sourceData2016);
+        break;
+      case "2017":
+        transformGraph(sourceData2017);
+        break;
+      case "2018":
+        transformGraph(sourceData2018);
+        break;
+      default:
+        transformGraph(sourceData2014);
+        break;
+    }
+    return;
+  }
+  $(".transform").removeClass("is-primary");
   let year = $(e.currentTarget).attr("id");
 
   // Load corresponding year
@@ -184,9 +257,36 @@ $(".year").click((e) => {
       updateGraph(sourceData2014);
       break;
   }
+})
+// Load per year data
+$(".transform").click((e) => {
+  if ($(e.currentTarget).hasClass("is-primary")) {
+    $(".transform").removeClass("is-primary");
+    $(".year.is-primary").click();
+  } else {
+    $(".transform").addClass("is-primary");
+    let year = $(".year.is-primary").attr("id");
 
-  // Keep distance filter if it exists
-  if($(".distance.is-primary").attr("id") !== "clear") {
-      $(".distance.is-primary").click();
+    // Load corresponding year
+    switch(year) {
+      case "2014":
+        transformGraph(sourceData2014);
+        break;
+      case "2015":
+        transformGraph(sourceData2015);
+        break;
+      case "2016":
+        transformGraph(sourceData2016);
+        break;
+      case "2017":
+        transformGraph(sourceData2017);
+        break;
+      case "2018":
+        transformGraph(sourceData2018);
+        break;
+      default:
+        transformGraph(sourceData2014);
+        break;
+    }
   }
 })
