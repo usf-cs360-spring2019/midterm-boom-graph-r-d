@@ -115,7 +115,7 @@ function createGraph(data) {
       .attr("offset", "100%")
       .attr("stop-color", "#149428")
 
-    // Append Legend
+    // Append Color Legend
     let legend = svg.append("g")
     .attr("class", "legend")
 
