@@ -300,6 +300,24 @@ $(".distance").click((e) => {
   }
 })
 
+$(".scroll").click((e) => {
+  setTimeout(() => {
+    $(".year#" + 2000).click();
+  }, 1000);
+  setTimeout(() => {
+    $(".year#" + 2005).click();
+  }, 3000);
+  setTimeout(() => {
+    $(".year#" + 2010).click();
+  }, 5000);
+  setTimeout(() => {
+    $(".year#" + 2015).click();
+  }, 7000);
+  setTimeout(() => {
+    $(".year#" + 2018).click();
+  }, 9000);
+})
+
 $(".special").click((e) => {
   $(".special").removeClass("is-primary");
   $(e.currentTarget).addClass("is-primary");
