@@ -24,8 +24,8 @@ let headers = ["distanceFromDowntown","incidentCount", "averageResponseTime"];
 // Header key to text for label
 let toText = (key) => {
   return {
-    "distanceFromDowntown": "Distance from downtown",
-    "averageResponseTime": "Average Response Time",
+    "distanceFromDowntown": "Distance from downtown (miles)",
+    "averageResponseTime": "Average Response Time (s)",
     "incidentCount": "Number of incidents",
   }[key]
 }
@@ -195,7 +195,9 @@ function updateGraph(data) {
     .data(data)
     .attr("d", path)
     .attr("stroke", (d) => !d.hide ? color(d.distanceFromDowntown) : "grey")
-    .attr("stroke-width", (d) => !d.hide ? size(d.incidentCount) : 0.5)
+    .attr("stroke-width", (d) => {
+      return d.highlight ? 3 : (!d.hide ? size(d.incidentCount) : 0.5);
+    })
 
   // Update Dimensions and axis
   const g = d3.selectAll(".dimension")
@@ -259,6 +261,7 @@ $(".year").click((e) => {
 // Load per distance from downtown data
 $(".distance").click((e) => {
   $(".distance").removeClass("is-primary");
+  $(".special").removeClass("is-primary");
   $(e.currentTarget).addClass("is-primary");
   let distance = $(e.currentTarget).attr("id");
 
@@ -296,3 +299,57 @@ $(".distance").click((e) => {
       break;
   }
 })
+
+$(".special").click((e) => {
+  $(".special").removeClass("is-primary");
+  $(e.currentTarget).addClass("is-primary");
+  let special = $(e.currentTarget).attr("id");
+  switch(special) {
+    case "treasureIsland":
+      updateDataSource(currentDataSource.map((location) => {
+        return {
+          ...location,
+          hide: location.neighborhood !== "Treasure Island",
+          highlight: location.neighborhood === "Treasure Island"
+        }
+      }));
+      break;
+    case "tenderloin":
+      updateDataSource(currentDataSource.map((location) => {
+        return {
+          ...location,
+          hide: location.zipcode !== "94102",
+          highlight: location.zipcode === "94102"
+        }
+      }));
+      break;
+    case "usf":
+      updateDataSource(currentDataSource.map((location) => {
+        return {
+          ...location,
+          hide: location.zipcode !== "94117",
+          highlight: location.zipcode === "94117"
+        }
+      }));
+      break;
+    case "mission":
+      updateDataSource(currentDataSource.map((location) => {
+        return {
+          ...location,
+          hide: location.neighborhood !== "Mission",
+          highlight: location.neighborhood === "Mission"
+        }
+      }));
+      break;
+  }
+})
+
+$('select[name="dropdown"]').change(function() {
+  updateDataSource(currentDataSource.map((location) => {
+    return {
+      ...location,
+      hide: location.zipcode !== $(this).val(),
+      highlight: location.zipcode === $(this).val()
+    }
+  }));
+});

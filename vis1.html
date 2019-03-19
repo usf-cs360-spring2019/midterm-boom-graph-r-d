@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="stylevis1.css">
   <script src="https://d3js.org/d3.v4.js"></script>
   <script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -20,67 +21,6 @@
   <script src="./data/2010.js"></script>
   <script src="./data/2015.js"></script>
   <script src="./data/2018.js"></script>
-  <script src="data.js"></script>
-  <style>
-  svg {
-    font: 10px sans-serif;
-  }
-
-  .background path {
-    fill: none;
-    stroke: #ddd;
-    shape-rendering: crispEdges;
-    transition: all 0.35s;
-  }
-
-  .graph path {
-    fill: none;
-    opacity: 0.4;
-    transition: all 0.35s;
-  }
-
-  .brush .extent {
-    fill-opacity: .3;
-    stroke: #fff;
-    shape-rendering: crispEdges;
-  }
-
-  .axis line,
-  .axis path {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-    transition: d 0.35s;
-  }
-
-  .axis text {
-      fill:black;
-    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
-  }
-  pre {
-    width: 100%;
-    height: 300px;
-    margin: 6px 12px;
-    tab-size: 40;
-    font-size: 10px;
-    overflow: auto;
-  }
-
-  .options {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .options .graphTitle {
-    flex: 100%;
-    text-align: center;
-    font-size: 1.2em;
-  }
-
-  .options .button {
-    margin: 5px;
-  }
-  </style>
 </head>
 
 <!-- body -->
@@ -130,6 +70,12 @@
                 </a>
               </div>
             </div>
+            <a class="navbar-item" href="dataprocessing.html">
+              <span class="icon">
+                <i class="fas fa-database"></i>
+              </span>
+              <span>Data and Processing</span>
+            </a>
             <a class="navbar-item" href="#prototype1">
               <span class="icon">
                 <i class="fas fa-adjust"></i>
@@ -214,16 +160,63 @@
         <div class="graphTitle">Filter by distance from downtown</div>
       </div>
 
+      <div class="options">
+        <div class="button is-medium special" id="tenderloin">
+          Tenderloin
+        </div>
+        <div class="button is-medium special" id="mission">
+          Mission
+        </div>
+        <div class="button is-medium special" id="usf">
+          USF
+        </div>
+        <div class="button is-medium special" id="treasureIsland">
+          Treasure Island
+        </div>
+        <div class="graphTitle">Specific locations</div>
+        <select name="dropdown" size=1>
+          <option value="94102">Tenderloin</option>
+          <option value="94103">South of Market</option>
+          <option value="94104">Chinatown</option>
+          <option value="94105">Financial District/South Beach</option>
+          <option value="94107">Financial District/South Beach</option>
+          <option value="94108">Financial District/South Beach</option>
+          <option value="94109">Tenderloin</option>
+          <option value="94110">Mission</option>
+          <option value="94111">Financial District/South Beach</option>
+          <option value="94112">Excelsior</option>
+          <option value="94114">Castro/Upper Market</option>
+          <option value="94115">Pacific Heights</option>
+          <option value="94116">Sunset/Parkside</option>
+          <option value="94117">Haight Ashbury</option>
+          <option value="94118">Presidio Heights</option>
+          <option value="94121">Outer Richmond</option>
+          <option value="94122">Sunset/Parkside</option>
+          <option value="94123">Marina</option>
+          <option value="94124">Bayview Hunters Point</option>
+          <option value="94127">West of Twin Peaks</option>
+          <option value="94129">Presidio</option>
+          <option value="94130">Treasure Island</option>
+          <option value="94131">Twin Peaks</option>
+          <option value="94132">Lakeshore</option>
+          <option value="94133">North Beach</option>
+          <option value="94134">Visitacion Valley</option>
+          <option value="94158">Mission Bay</option>
+        </select>​
+      </div>
+
       <h3>Interpretation</h3>
 
       <p>
-        This visualization demonstrates all the fire-fighter incidents since April 2000. We can tell that there are many more incidents in the city center, which is represented by bubble size. Color represents the average response time, darker being highest at 15 minutes and light gree as lowest being 3 minutes.
+        This visualization represents the average incident response time by zipcode, each of which the distance from downtown is calculated. The more red lines are closer to the center of San Francisco (the Financial District), while greener ones are further away. The stroke width correlates to the number of incidents, which is done on purpose
+        as lesser-incident-likely have lesser response time. You may select to view a particular year using the buttons above the graph, and display zipcodes that are closer, or further, from downtown using the buttons under the graph. It is encouraged to use these as trends from each year vary and the location of the incident demonstrates the average response time change.
+        The average response time is calculated by calculating the difference between the call time and on scene time. Any case that no emergency unit is sent, the incident is ignored.
       </p>
 
       <h3>Discussion</h3>
 
       <p>
-        We can see that this data visualization demonstrats that the Tenderloin, despite not having the highest number of incidents, still have the highest response time in all the city. This could explained by either a lack of full attention of the Tenderloin by fire-fighters or just the fact that there could be less firestations.
+        With this visualization, we can see that year after year, downtown San Francisco has many more incidents than any other region in the city. This makes sense as the dangerous regions such as the Tenderloin are close to the city center. Further, we can see that even those have a very low response time, but the response time has been faster than average as the years go by. When filtering medium to large distance from downtown, we can see the response times vary a lot, regardless of the number of incidents. There is a particular region, <a class="special" id="treasureIsland">Treasure Island</a>, that suffers most from this. Clicking on this link will demonstrate this single region that despite having a low incident rate and being just 2 miles away from downtown, has a very high average response time.
       </p>
 
       <h3>Credit</h3>

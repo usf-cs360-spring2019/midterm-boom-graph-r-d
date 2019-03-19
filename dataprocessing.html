@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<!-- head -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CS 360/560 Spring 2019</title>
+
+  <!-- bulma 0.7.2 and font awesome v5.7.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- body -->
+<body>
+
+  <!-- header -->
+  <section class="hero is-primary is-bold">
+    <!-- todo: change assignment and name -->
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          SF Fire Call Logistics by Boom-Graph R&D: Average Response Time by Location
+        </h1>
+        <h2 class="subtitle">
+          Samuel Escapa & Sameer Isaq
+        </h2>
+      </div>
+    </div>
+
+    <!-- todo: change navigation as needed -->
+    <div class="hero-foot">
+      <div class="container">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+              <span class="icon">
+                <i class="fas fa-home"></i>
+              </span>
+              <span>Home</span>
+            </a>
+          </div>
+          <div id="main-navbar" class="navbar-menu">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <span class="icon">
+                  <i class="fas fa-chart-area"></i>
+                </span>
+                <span>Visualizations</span>
+              </a>
+
+              <div class="navbar-dropdown">
+                <a class="navbar-item" href="vis1.html">
+                  Average Response Time by Location
+                </a>
+                <a class="navbar-item" href="vis2.html">
+                  Incident Call Type by Location
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="navbar-end">
+            <a class="navbar-item" href="#about">
+              <span class="icon">
+                <i class="fas fa-info-circle"></i>
+              </span>
+              <span>About</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- todo: add sections as necessary -->
+  <section class="section">
+    <div class="container content">
+      <h2 id="dataprocessing">Data and Processing:</h2>
+      <p>
+        The data set (4,897,527 rows, with 34 columns) is a database of <a href="https://data.sfgov.org/Public-Safety/Fire-Department-Calls-for-Service/nuek-vuh3" target="_blank">SF Fire Department Calls for Service</a>, representing the fire unit responses to calls. Each row represents a call that has values from Location, Call Type, priority, response time, among many more.
+      </p>
+      <p>
+        We collected our data by doing some analysis on the source data and calculating average data values for each zipcode. We did this by first, filtering the data by year. We then collected all the zipcodes that are present and calculated specific values:
+      </p>
+      <p>
+        For visualization 1, we calculated the average response time by calculating the difference between the <code>Received DtTm</code> and <code>On Scene DtTm</code> in seconds. We then calculated the distance from downtown using the geo coordinates, using the Financial District (lat: 37.7946, lon: -122.3999) and calculating the distance in miles.
+      </p>
+      <p>
+        Example Visualization 1 entry for 2010:
+        <pre>
+{
+  zipcode: '94102',
+  averageResponseTime: 713.8682680800136,
+  totalResponseTime: 16701662,
+  incidentCount: 23396,
+  neighborhood: 'Tenderloin',
+  distanceFromDowntown: 0.966178923121625
+}</pre>
+      </p>
+      <p>
+        For visualization 2, we gathered the type of incidents that are reported, starting from 2014. This is because prior to 2014, that data column <code>Call Type Group</code> was not collected.
+      </p><p>
+        Example Visualization 2 entry for 2015:
+        <pre>
+{
+  zipcode: '94103',
+  callCount: 37584,
+  neighborhood: 'South of Market',
+  Alarm: 6908,
+  Potentially Life-Threatening: 20764,
+  Non Life-threatening: 9155,
+  Fire: 757
+}</pre>
+      </p>
+      <p>
+        We collected this data by running a separate node.js program which enabled us to process large quantities of data, and created JSON file outputs to use for D3.
+      </p>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <small>
+        <a href="#top">
+          <span class="fas fa-arrow-up"></span>
+          <span>Back to Top</span>
+        </a>
+        <br/>
+        <a href="/">CS 360/560 Data Visualization</a>
+        &bullet;
+        <a href="https://myusf.usfca.edu/arts-sciences/computer-science">Department of Computer Science</a>
+        &bullet;
+        <a href="https://www.usfca.edu/">University of San Franciscio</a>
+      </small>
+    </div>
+  </footer>
+
+  <script src="./vis1.js"></script>
+<!-- end body and html -->
+</body>
+</html>
