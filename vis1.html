@@ -16,6 +16,10 @@
   <script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="./data/2000.js"></script>
+  <script src="./data/2005.js"></script>
+  <script src="./data/2010.js"></script>
+  <script src="./data/2015.js"></script>
+  <script src="./data/2018.js"></script>
   <script src="data.js"></script>
   <style>
   svg {
@@ -26,11 +30,13 @@
     fill: none;
     stroke: #ddd;
     shape-rendering: crispEdges;
+    transition: all 0.35s;
   }
 
-  .foreground path {
+  .graph path {
     fill: none;
     opacity: 0.4;
+    transition: all 0.35s;
   }
 
   .brush .extent {
@@ -44,6 +50,7 @@
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
+    transition: d 0.35s;
   }
 
   .axis text {
@@ -57,6 +64,21 @@
     tab-size: 40;
     font-size: 10px;
     overflow: auto;
+  }
+
+  .options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .options .graphTitle {
+    flex: 100%;
+    text-align: center;
+    font-size: 1.2em;
+  }
+
+  .options .button {
+    margin: 5px;
   }
   </style>
 </head>
@@ -153,9 +175,44 @@
       </div>
 
       <h2 id="vis1">Visualization 1</h2>
+      <div class="options">
+        <div class="graphTitle">Filter by year</div>
+        <div class="button is-medium year is-primary" id="2000">
+          2000
+        </div>
+        <div class="button is-medium year" id="2005">
+          2005
+        </div>
+        <div class="button is-medium year" id="2010">
+          2010
+        </div>
+        <div class="button is-medium year" id="2015">
+          2015
+        </div>
+        <div class="button is-medium year" id="2018">
+          2018
+        </div>
+      </div>
+      <Br />
 
-      <svg id="svg" width="100%" height="600" style="background-color: whitesmoke; border: 1px solid black;">
+      <svg id="svg" width="100%" height="500" style="background-color: whitesmoke; border: 1px solid black;">
       </svg>
+
+      <div class="options">
+        <div class="button is-medium distance is-primary" id="clear">
+          Clear
+        </div>
+        <div class="button is-medium distance" id="short">
+          0 - 2 miles
+        </div>
+        <div class="button is-medium distance" id="medium">
+          2 miles - 4 miles
+        </div>
+        <div class="button is-medium distance" id="large">
+          4+ miles
+        </div>
+        <div class="graphTitle">Filter by distance from downtown</div>
+      </div>
 
       <h3>Interpretation</h3>
 
