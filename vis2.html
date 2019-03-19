@@ -12,6 +12,38 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./data_2/2018.js"></script>
+  <script src="./data_2/2017.js"></script>
+  <script src="./data_2/2016.js"></script>
+  <script src="./data_2/2015.js"></script>
+  <script src="./data_2/2014.js"></script>
+  <style>
+  .axis .domain {
+    display: none;
+  }
+
+  .options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .options .graphTitle {
+    flex: 100%;
+    text-align: center;
+    font-size: 1.2em;
+  }
+
+  .options .button {
+    margin: 5px;
+  }
+
+  rect {
+    transition: all 0.35s;
+  }
+  </style>
 </head>
 
 <!-- body -->
@@ -107,7 +139,26 @@
 
       <h2 id="vis1">Visualization 2</h2>
 
-      <svg width="100%" height="400" style="background-color: whitesmoke; border: 1px solid black;">
+      <div class="options">
+        <div class="graphTitle">Filter by year</div>
+        <div class="button is-medium year is-primary" id="2014">
+          2014
+        </div>
+        <div class="button is-medium year" id="2015">
+          2015
+        </div>
+        <div class="button is-medium year" id="2016">
+          2016
+        </div>
+        <div class="button is-medium year" id="2017">
+          2017
+        </div>
+        <div class="button is-medium year" id="2018">
+          2018
+        </div>
+      </div>
+
+      <svg id="svg" width="100%" height="400" style="background-color: whitesmoke; border: 1px solid black;">
       </svg>
 
       <h3>Interpretation</h3>
@@ -222,7 +273,7 @@
       </small>
     </div>
   </footer>
-
+  <script src="./vis2.js"></script>
 <!-- end body and html -->
 </body>
 </html>
